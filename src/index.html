@@ -4,12 +4,23 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>Ladybug</title>
     </head>
     <body>
         <textarea id=code></textarea><br>
-		<textarea id=result></textarea><br>
+		<textarea id=result cols=80 rows=4></textarea><br>
 		<button id=button>Run</button>
-        <script src=main.mjs></script>
+        <script src=main.mjs></script><br>
+        Example: <br>
+        <textarea>
+ladybug.step(3)
+ladybug.turn("left")
+ladybug.step(2)
+
+for (var i = 0; i < 2; i++)
+    ladybug.turn("right")
+
+ladybug.step(5)
+        </textarea>
     </body>
 </html>
