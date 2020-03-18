@@ -1,6 +1,8 @@
 import CodeMirror from "codemirror"
 
-declare const result: HTMLTextAreaElement
+declare const result: HTMLTextAreaElement,
+			  code: HTMLTextAreaElement,
+			  button: HTMLButtonElement
 
 const head = document.getElementsByTagName("head")[0],
 	  body = document.getElementsByTagName("body")[0],
@@ -34,33 +36,33 @@ const ladybug = {
 				case 0:
 					for (var i = 0; i < count; i++) {
 						ladybug.y--
-						frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
+						//frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
 					}
 					break
 				case 1:
 					for (var i = 0; i < count; i++) {
 						ladybug.x++
-						frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
+						//frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
 					}
 					
 					break
 				case 2:
 					for (var i = 0; i < count; i++) {
 						ladybug.y++
-						frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
+						//frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
 					}
 					
 					break
 				case 3:
 					for (var i = 0; i < count; i++) {
 						ladybug.x--
-						frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
+						//frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
 					}
 					
 					break
 			}
 		},
-		turn(dir) {
+		turn(dir: "left" | "right") {
 			if (dir == "left") {
 				console.log("turning left")
 				ladybug.rot--
@@ -75,7 +77,7 @@ const ladybug = {
 			else if (ladybug.rot > 3)
 				ladybug.rot = 0
 			
-			frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
+			//frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
 		},
 		x: 8,
 		y: 8,
@@ -92,19 +94,16 @@ onload = () => {
 	const editor = CodeMirror.fromTextArea(code, {
 		mode:  "javascript",
 		lineNumbers: true,
-		matchBrackets: true,
 		indentWithTabs: true,
 		indentUnit: 4
 	})
 
 	button.onclick = event => {
-		frames = []
-
 		ladybug.x = 8
 		ladybug.y = 8
 		ladybug.rot = 0
 
-		frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
+		//frames.push([ ladybug.x, ladybug.y, ladybug.rot ])
 
 		editor.save()
 
@@ -128,16 +127,17 @@ onload = () => {
 	}
 }
 
-function createAppendElement(tag: string, properties: {}, target: Element) {
+function createAppendElement(tag: string, properties: {}, target: HTMLElement) {
 	const element = document.createElement(tag)
 
 	for (let [ key, value ] of Object.entries(properties))
-		element[key] = new Element()
+		// @ts-ignore
+		element[key] = value
 	
 	return target.appendChild(element)
 }
 
-function createAppendElements(list) {
+function createAppendElements(list: []) {
 	for (let item of list)
 		$(list[0])
 
